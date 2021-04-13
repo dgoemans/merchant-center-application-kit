@@ -30,3 +30,32 @@ Supported options are:
 
 - `silenceConsoleWarnings`: a list of strings or RegEx to match against console logs. If the value matches, the log will be suppressed. This option only takes effect when the environment variable `CI` is defined.
 - `notThrowWarnings`: a list of strings or RegEx to match against console logs. If the value matches, no error will be thrown. This option only takes effect when the environment variable `CI` is defined.
+
+## Opt-in Enzyme support
+
+This Jest preset does not ship with Enzyme support anymore.
+
+In case you still use Enzyme in your tests, you need to do a bit of extra configuration as described below:
+
+1. Install the necessary dependencies:
+
+```
+yarn add \
+  @commercetools/enzyme-extensions \
+  @commercetools/jest-enzyme-matchers \
+  @wojtekmaj/enzyme-adapter-react-17 \
+  enzyme \
+  enzyme-matchers \
+  enzyme-to-json \
+  jest-enzyme
+```
+
+2. In your Jest config, instead of importing the preset `@commercetools-frontend/jest-preset-mc-app` you need to import `@commercetools-frontend/jest-preset-mc-app/jest-preset-for-enzyme.js`
+
+```js
+const jestPresetForEnzyme = require('@commercetools-frontend/jest-preset-mc-app/jest-preset-for-enzyme');
+
+module.exports = {
+  preset: jestPresetForEnzyme,
+};
+```
